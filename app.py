@@ -43,9 +43,14 @@ def home():
 year_ago = dt.date(2017, 8, 23) - dt.timedelta(days=365)
 
 #filter precip data by date constrictions
-percip_data = session.query(Measurement.date, Measurement.prcp).\
+precip_data = session.query(Measurement.date, Measurement.prcp).\
     filter(Measurement.date >= year_ago).\
     order_by(Measurement.date).all()
+
+#from stack overflow - list comprehension and dictionaries
+#{key: value for (key, value) in iterable}
+#create a dictionary using date as key and prcp as value
+1yr_precip = {date: prcp for date, prcp in precip_data}
 
 @app.route("/api/v1.0/stations")
 #return json list of stations in the dataset

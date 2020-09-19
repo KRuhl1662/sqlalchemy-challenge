@@ -56,7 +56,7 @@ def precipitation():
     #create a dictionary using date as key and prcp as value
 
     yr_precip = {date: prcp for date, prcp in precip_data}
-    return jsonify(yr_precip)
+    return jsonify(precipitation=yr_precip)
 
 @app.route("/api/v1.0/stations")
 def stations():
@@ -69,7 +69,7 @@ def stations():
     #one way to return a jsonify list
     station_result =[s[0] for s in all_stations]
 
-    return jsonify(station_result)
+    return jsonify(stations=station_result)
 
 
 
@@ -99,7 +99,7 @@ def temp_monthly():
     #another way to return jsonify list
     temp_result =list(np.ravel(temp_for_station))
 
-    return jsonify(temp_result)
+    return jsonify(temperatures=temp_result)
     
 
 @app.route("/api/v1.0/temp/<start>")
@@ -117,7 +117,7 @@ def start_date(start):
 
     #return json of min, max, avg temp
     single_stats = list(np.ravel(start_summary))
-    return jsonify(single_stats)
+    return jsonify(stats=single_stats)
 
 # i know some of my classmates made this some sort of loop, but since we found the start above it seems redundant, and to be perfectly honest
 # i couldn't get it to work if i just put in a start date for the part below (with the part above commented out. I have included the original
@@ -144,7 +144,7 @@ def date_range(start=None, end=None):
     
     #return json of min, max, avg temp
     range_stats = list(np.ravel(range_summary))
-    return jsonify(range_stats)
+    return jsonify(stats=range_stats)
     
 
     
